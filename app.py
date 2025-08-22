@@ -1,5 +1,8 @@
 from fastapi import FastAPI, Query
+from dotenv import load_dotenv
 from llm.orchestrator import ask
+
+load_dotenv()
 
 
 app = FastAPI()
