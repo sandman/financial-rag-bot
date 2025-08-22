@@ -1,3 +1,4 @@
+# llm/orchestrator.py
 from openai import OpenAI
 from retrieval.retriever import hybrid_search
 from load_dotenv import load_dotenv
@@ -8,26 +9,32 @@ client = OpenAI()
 
 SYSTEM_PROMPT = """
 You are a financial research assistant. 
-Answer only using provided context. 
-Always cite [doc, page].
-If context is missing, say "Not found in documents".
+Answer strictly using the provided context. 
+Always cite the source as [doc, page].
+If the answer is not in context, say "Not found in documents".
 """
 
 
-def ask(query):
+def ask(query: str):
     hits = hybrid_search(query, top_k=6)
+
+    # Build context string
     context = ""
     for h in hits:
         doc, page, text = h[0]["doc"], h[0]["page"], h[0]["text"]
         context += f"[{doc} p.{page}]: {text}\n"
 
-    prompt = f"{SYSTEM_PROMPT}\nContext:\n{context}\n\nQuestion: {query}\nAnswer:"
+    # Send to LLM
+    messages = [
+        {"role": "system", "content": SYSTEM_PROMPT},
+        {
+            "role": "user",
+            "content": f"Context:\n{context}\n\nQuestion: {query}\nAnswer:",
+        },
+    ]
 
     resp = client.chat.completions.create(
-        model="gpt-4.1",  # or latest state-of-the-art reasoning model
-        messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": prompt},
-        ],
+        model="gpt-4.1", messages=messages, temperature=0  # or gpt-4o-mini for cheaper
     )
+
     return resp.choices[0].message.content
