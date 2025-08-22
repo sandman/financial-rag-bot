@@ -5,10 +5,12 @@ import json, pickle, faiss
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
-# Force safe multiprocessing mode on macOS/Python 3.12
-import torch.multiprocessing as mp
+# # Force safe multiprocessing mode on macOS/Python 3.12
+# import torch.multiprocessing as mp
 
-mp.set_start_method("spawn", force=True)
+# mp.set_start_method("spawn", force=True)
+
+torch.set_num_threads(1)
 
 PROCESSED = Path("data/processed/docs.jsonl")
 INDEX_DIR = Path("data/index")
