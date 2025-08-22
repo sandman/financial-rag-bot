@@ -1,0 +1,10 @@
+faiss-cpu
+rank-bm25
+transformers
+sentence-transformers
+openai
+pypdf
+pandas
+fastapi
+uvicorn
+sqlalchemy
