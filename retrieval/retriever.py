@@ -23,6 +23,14 @@ docs = json.load(open(INDEX_DIR / "docs.json"))
 bm25 = pickle.load(open(INDEX_DIR / "bm25.pkl", "rb"))
 
 
+def reload_indexes():
+    global faiss_index, docs, bm25
+    faiss_index = faiss.read_index(str(INDEX_DIR / "faiss.index"))
+    docs = json.load(open(INDEX_DIR / "docs.json"))
+    bm25 = pickle.load(open(INDEX_DIR / "bm25.pkl", "rb"))
+    return True
+
+
 def safe_encode(texts, batch_size=8):
     all_embeddings = []
     for i in range(0, len(texts), batch_size):
