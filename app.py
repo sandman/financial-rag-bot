@@ -47,6 +47,11 @@ def get_pdf(name: str):
     return Response(content=path.read_bytes(), media_type="application/pdf")
 
 
+@app.get("/health")
+def health():
+    return {"ok": True}
+
+
 @app.get("/", response_class=HTMLResponse)
 def root_page():
     return """

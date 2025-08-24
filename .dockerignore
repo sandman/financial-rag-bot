@@ -1,0 +1,107 @@
+# flyctl launch added from .gitignore
+# Python-generated files
+**/__pycache__
+**/*.py[oc]
+**/build
+**/dist
+**/wheels
+**/*.egg-info
+
+# Virtual environments
+**/.venv
+**/venv
+**/env
+**/ENV
+**/env.bak
+**/venv.bak
+
+# Byte-compiled / optimized / DLL files
+**/*$py.class
+
+# Installer logs
+**/pip-log.txt
+**/pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+**/htmlcov
+**/.tox
+**/.nox
+**/.coverage
+**/.coverage.*
+**/coverage.xml
+**/*.cover
+**/*.py,cover
+**/.pytest_cache
+**/.hypothesis
+
+# Type checker / linter caches
+**/.mypy_cache
+**/.ruff_cache
+**/.pyre
+**/.pytype
+**/.pyrightcache
+
+# Jupyter
+**/.ipynb_checkpoints
+**/.ipython
+**/.profile_default
+
+# Environments & secrets
+**/.env
+**/.env.*
+**/*.env
+
+# IDE/editor
+**/.vscode
+**/.idea
+**/*.code-workspace
+
+# OS
+**/.DS_Store
+
+# Logs
+**/logs
+**/*.log
+
+# ML/AI artifacts
+**/wandb
+**/mlruns
+**/lightning_logs
+**/runs
+**/outputs
+**/checkpoints
+**/models/**/*.bin
+**/models/**/*.safetensors
+**/models/**/*.pt
+**/models/**/*.pth
+**/models/**/*.ckpt
+**/models/**/*.onnx
+**/models/**/*.tflite
+**/models/**/*.h5
+**/*.joblib
+**/*.pkl
+**/*.pt
+**/*.pth
+**/*.ckpt
+**/*.onnx
+**/*.tflite
+**/*.h5
+**/*.safetensors
+
+# Vector DB / local indices (RAG)
+# Keep indices so they can be copied into the image
+# **/chroma
+# **/.chroma
+# **/vectorstore
+# (do not ignore data/index/*)
+
+# Ensure prebuilt indices are INCLUDED even if earlier globs ignore *.pkl, etc.
+!data/index/**
+
+# Caches
+**/.cache
+**/cache
+
+# flyctl launch added from .venv/.gitignore
+.venv/**/*
+fly.toml
